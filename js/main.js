@@ -22,32 +22,46 @@ const observer = new IntersectionObserver((entradas) => {
  
 observer.observe(herramientas);
 
-function cerrarMenu() {
-    menuToggle.setAttribute("aria-expanded", "false");
-    navegacion.classList.remove("is-open");
-    menuToggle.querySelector(".sr-only").textContent = "Abrir menú de navegación";
+function inicializarMenu() {
+    if (!menuToggle || !navegacion) return;
+
+    const textoAccesible = menuToggle.querySelector(".sr-only");
+
+    function cerrarMenu() {
+        menuToggle.setAttribute("aria-expanded", "false");
+        navegacion.classList.remove("is-open");
+        if (textoAccesible) textoAccesible.textContent = "Abrir menú de navegación";
+    }
+
+    menuToggle.addEventListener("click", () => {
+        const menuAbierto = menuToggle.getAttribute("aria-expanded") === "true";
+
+        menuToggle.setAttribute("aria-expanded", String(!menuAbierto));
+        navegacion.classList.toggle("is-open", !menuAbierto);
+        if (textoAccesible) {
+            textoAccesible.textContent = menuAbierto
+                ? "Abrir menú de navegación"
+                : "Cerrar menú de navegación";
+        }
+    });
+
+    navegacion.querySelectorAll("a").forEach((enlace) => {
+        enlace.addEventListener("click", cerrarMenu);
+    });
+
+    document.addEventListener("keydown", (evento) => {
+        if (evento.key === "Escape" && menuToggle.getAttribute("aria-expanded") === "true") {
+            cerrarMenu();
+            menuToggle.focus();
+        }
+    });
 }
 
-menuToggle.addEventListener("click", () => {
-    const menuAbierto = menuToggle.getAttribute("aria-expanded") === "true";
-
-    menuToggle.setAttribute("aria-expanded", String(!menuAbierto));
-    navegacion.classList.toggle("is-open", !menuAbierto);
-    menuToggle.querySelector(".sr-only").textContent = menuAbierto
-        ? "Abrir menú de navegación"
-        : "Cerrar menú de navegación";
-});
-
-navegacion.querySelectorAll("a").forEach((enlace) => {
-    enlace.addEventListener("click", cerrarMenu);
-});
-
-document.addEventListener("keydown", (evento) => {
-    if (evento.key === "Escape" && menuToggle.getAttribute("aria-expanded") === "true") {
-        cerrarMenu();
-        menuToggle.focus();
-    }
-});
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", inicializarMenu);
+} else {
+    inicializarMenu();
+}
 
 let i=0;
 let txt='Thomas Gerónimo Camicha';
@@ -62,15 +76,3 @@ function tipeo(){
     }
 }
 
-const menuToggle = document.getElementById('menuToggle');
-        const nav = document.querySelector('header nav');
-
-        menuToggle.addEventListener('click', () => {
-            const menuAbierto = nav.classList.toggle('menu-abierto');
-            menuToggle.setAttribute('aria-expanded', menuAbierto);
-            menuToggle.setAttribute('aria-label', menuAbierto ? 'Cerrar menú' : 'Abrir menú');
-        });
-
-        nav.querySelectorAll('a').forEach((enlace) => {
-            enlace.addEventListener('click', () => nav.classList.remove('menu-abierto'));
-        });
