@@ -32,3 +32,16 @@ function tipeo(){
         setTimeout(tipeo, speed);
     }
 }
+
+const menuToggle = document.getElementById('menuToggle');
+        const nav = document.querySelector('header nav');
+
+        menuToggle.addEventListener('click', () => {
+            const menuAbierto = nav.classList.toggle('menu-abierto');
+            menuToggle.setAttribute('aria-expanded', menuAbierto);
+            menuToggle.setAttribute('aria-label', menuAbierto ? 'Cerrar menú' : 'Abrir menú');
+        });
+
+        nav.querySelectorAll('a').forEach((enlace) => {
+            enlace.addEventListener('click', () => nav.classList.remove('menu-abierto'));
+        });
