@@ -1,0 +1,283 @@
+:root {
+    --fondo: #0f1419;
+    --fondo-secundario: #131a20;
+    --panel: #1b232b;
+    --borde: #34404c;
+    --texto: #d8dee9;
+    --texto-suave: #a3aab5;
+    --azul: #399ee6;
+    --azul-claro: #59c2ff;
+    --verde: #aad94c;
+    --amarillo: #e6b673;
+    --naranja: #ffb454;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--fondo);
+    color: var(--texto);
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    line-height: 1.6;
+    padding-top: 76px;
+}
+
+header {
+    align-items: center;
+    background: rgba(15, 20, 25, 0.96);
+    border-bottom: 1px solid var(--borde);
+    display: flex;
+    justify-content: space-between;
+    left: 0;
+    min-height: 76px;
+    padding: 0 6%;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 10;
+}
+
+header p {
+    color: var(--azul-claro);
+    font-weight: 700;
+}
+
+nav {
+    align-items: center;
+    display: flex;
+    gap: 1.4rem;
+}
+
+a {
+    color: var(--azul-claro);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+nav a {
+    color: var(--texto);
+    font-size: 0.95rem;
+}
+
+a:hover,
+nav a:hover {
+    color: var(--naranja);
+}
+
+main,
+#Sobremi,
+#herramientas,
+#proyectos,
+#contacto {
+    min-height: 100vh;
+    padding: 6rem 8%;
+    scroll-margin-top: 76px;
+}
+
+main {
+    align-content: center;
+    background: linear-gradient(135deg, var(--fondo) 0%, #172532 100%);
+    display: grid;
+    justify-items: start;
+}
+
+main h1 {
+    color: #f3f4f5;
+    font-size: clamp(2.2rem, 6vw, 4.8rem);
+    max-width: 850px;
+}
+
+main h1 span {
+    color: var(--azul-claro);
+}
+
+main p {
+    color: var(--texto-suave);
+    font-size: 1.1rem;
+    margin: 1.5rem 0 2rem;
+    max-width: 760px;
+}
+
+h2 {
+    color: #ffffff;
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 2rem;
+}
+
+h2::before {
+    color: var(--verde);
+    content: "// ";
+}
+
+h3,
+h4 {
+    color: var(--amarillo);
+}
+
+button {
+    background: #2676a8;
+    border: 1px solid var(--azul-claro);
+    border-radius: 4px;
+    color: #ffffff;
+    cursor: pointer;
+    font: inherit;
+    padding: 0.75rem 1.4rem;
+    transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+button a {
+    color: inherit;
+}
+
+button:hover,
+button:focus-visible {
+    background: #399ee6;
+    box-shadow: 0 0 0 3px rgba(89, 194, 255, 0.25), 0 6px 18px rgba(57, 158, 230, 0.35);
+    outline: none;
+    transform: translateY(-2px);
+}
+
+#Sobremi {
+    background: var(--fondo-secundario);
+}
+
+#mitadIzquierda,
+#mitadDerecha {
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+    padding: 1.5rem;
+}
+
+#mitadIzquierda {
+    margin-bottom: 1.5rem;
+}
+
+#mitadIzquierda p,
+#mitadDerecha p,
+#contacto p {
+    color: var(--texto-suave);
+    margin-top: 0.75rem;
+}
+
+#mitadDerecha {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+#herramientas {
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+#herramientas > section {
+    background: var(--fondo-secundario);
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+    padding: 1.5rem;
+}
+
+.habilidad {
+    margin-top: 1.5rem;
+}
+
+.habilidad-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.4rem;
+}
+
+.habilidad-info span:last-child {
+    color: var(--azul-claro);
+}
+
+.barra {
+    background-color: #3a3a3d;
+    border-radius: 10px;
+    height: 10px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.progreso {
+    background: linear-gradient(90deg, var(--azul), var(--azul-claro));
+    border-radius: 10px;
+    height: 100%;
+    transition: width 1.5s ease;
+    width: 0;
+}
+
+#proyectos {
+    background: linear-gradient(135deg, #172532 0%, var(--fondo) 100%);
+}
+
+#contacto {
+    background: var(--fondo-secundario);
+}
+
+.contacto-contenedor {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 2rem;
+}
+
+.contacto-item {
+    background: var(--panel);
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+    padding: 1.25rem;
+}
+
+footer {
+    background: #0b1014;
+    border-top: 1px solid var(--borde);
+    color: var(--texto-suave);
+    padding: 1.5rem 8%;
+    text-align: center;
+}
+
+@media (max-width: 760px) {
+    body {
+        padding-top: 126px;
+    }
+
+    header {
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 126px;
+        padding: 1rem 6%;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        gap: 0.7rem 1rem;
+    }
+
+    main,
+    #Sobremi,
+    #herramientas,
+    #proyectos,
+    #contacto {
+        padding: 4rem 6%;
+        scroll-margin-top: 126px;
+    }
+
+    #mitadDerecha,
+    #herramientas,
+    .contacto-contenedor {
+        grid-template-columns: 1fr;
+    }
+}
+
