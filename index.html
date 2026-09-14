@@ -9,7 +9,13 @@
 <body onload="tipeo()">
     <header>
         <p>Thomas Gerónimo Camicha</p>
-        <nav>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navegacion-principal">
+            <span class="menu-toggle-line"></span>
+            <span class="menu-toggle-line"></span>
+            <span class="menu-toggle-line"></span>
+            <span class="sr-only">Abrir menú de navegación</span>
+        </button>
+        <nav id="navegacion-principal">
             <a href="#main">Inicio</a>
             <a href="#Sobremi">Sobre mi</a>
             <a href="#herramientas">Herramientas</a>

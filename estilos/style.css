@@ -67,6 +67,19 @@ nav a {
     font-size: 0.95rem;
 }
 
+.menu-toggle {
+    display: none;
+}
+
+.sr-only {
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    clip: rect(0, 0, 0, 0);
+}
+
 a:hover,
 nav a:hover {
     color: var(--naranja);
@@ -249,20 +262,73 @@ footer {
 
 @media (max-width: 760px) {
     body {
-        padding-top: 126px;
+        padding-top: 76px;
     }
 
     header {
-        align-items: flex-start;
+        min-height: 76px;
+        padding: 0 6%;
+    }
+
+    .menu-toggle {
+        align-items: center;
+        background: transparent;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        display: flex;
         flex-direction: column;
+        gap: 5px;
         justify-content: center;
-        min-height: 126px;
-        padding: 1rem 6%;
+        padding: 0.55rem;
+    }
+
+    .menu-toggle:hover,
+    .menu-toggle:focus-visible {
+        background: transparent;
+        box-shadow: none;
+        transform: none;
+    }
+
+    .menu-toggle-line {
+        background: var(--azul-claro);
+        display: block;
+        height: 2px;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+        width: 1.5rem;
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-toggle-line:first-child {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-toggle-line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-toggle-line:last-of-type {
+        transform: translateY(-7px) rotate(-45deg);
     }
 
     nav {
-        flex-wrap: wrap;
-        gap: 0.7rem 1rem;
+        background: var(--fondo);
+        border-bottom: 1px solid var(--borde);
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        left: 0;
+        padding: 0.5rem 6% 1rem;
+        position: absolute;
+        right: 0;
+        top: 100%;
+    }
+
+    nav.is-open {
+        display: flex;
+    }
+
+    nav a {
+        padding: 0.65rem 0;
+        width: 100%;
     }
 
     main,
@@ -280,4 +346,3 @@ footer {
         grid-template-columns: 1fr;
     }
 }
-
