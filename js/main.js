@@ -1,5 +1,7 @@
 const herramientas = document.getElementById("herramientas");
 const progresos = document.querySelectorAll(".progreso");
+const menuToggle = document.querySelector(".menu-toggle");
+const navegacion = document.getElementById("navegacion-principal");
 
 const observer = new IntersectionObserver((entradas) => {
 
@@ -19,6 +21,33 @@ const observer = new IntersectionObserver((entradas) => {
 });
  
 observer.observe(herramientas);
+
+function cerrarMenu() {
+    menuToggle.setAttribute("aria-expanded", "false");
+    navegacion.classList.remove("is-open");
+    menuToggle.querySelector(".sr-only").textContent = "Abrir menú de navegación";
+}
+
+menuToggle.addEventListener("click", () => {
+    const menuAbierto = menuToggle.getAttribute("aria-expanded") === "true";
+
+    menuToggle.setAttribute("aria-expanded", String(!menuAbierto));
+    navegacion.classList.toggle("is-open", !menuAbierto);
+    menuToggle.querySelector(".sr-only").textContent = menuAbierto
+        ? "Abrir menú de navegación"
+        : "Cerrar menú de navegación";
+});
+
+navegacion.querySelectorAll("a").forEach((enlace) => {
+    enlace.addEventListener("click", cerrarMenu);
+});
+
+document.addEventListener("keydown", (evento) => {
+    if (evento.key === "Escape" && menuToggle.getAttribute("aria-expanded") === "true") {
+        cerrarMenu();
+        menuToggle.focus();
+    }
+});
 
 let i=0;
 let txt='Thomas Gerónimo Camicha';
